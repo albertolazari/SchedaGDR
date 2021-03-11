@@ -54,7 +54,7 @@ Leggera
 0 0
 Bag:
 40
-12
+11
 Weapon
 Spada parlante
 2
@@ -109,11 +109,6 @@ Corno
 1
 !empty
 Object
-Razioni
-0.5
-4
-Cibo per un giorno
-Object
 Mantello azzurro magico
 1
 1
@@ -131,5 +126,5 @@ Gemma con nome inciso
 Object
 Frutta
 0.3
-3
+1
 Quantità per un pasto

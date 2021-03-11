@@ -34,14 +34,14 @@ void MainWindow::setController(Controller *c) {
 
     //bag
     connect(bag->getDeleteButton(), SIGNAL(clicked()), controller, SLOT(deleteItem()));
-    connect(bag->getREquipButton(), SIGNAL(clicked()),controller, SLOT(equipRight()));
-    connect(bag->getLEquipButton(), SIGNAL(clicked()),controller, SLOT(equipLeft()));
+    connect(bag->getREquipButton(), SIGNAL(clicked()), controller, SLOT(equipRight()));
+    connect(bag->getLEquipButton(), SIGNAL(clicked()), controller, SLOT(equipLeft()));
     connect(Borsa->actions()[0], SIGNAL(triggered()), controller, SLOT(setMaxWeight()));
-    connect(middleWidget->getRightHand()->getDropButton(),SIGNAL(clicked()),controller,SLOT(dropRight()));
-    connect(middleWidget->getLeftHand()->getDropButton(),SIGNAL(clicked()),controller,SLOT(dropLeft()));
-    connect(middleWidget->getRightHand()->getUseButton(),SIGNAL(clicked()),controller,SLOT(useRight()));
-    connect(middleWidget->getLeftHand()->getUseButton(),SIGNAL(clicked()),controller,SLOT(useLeft()));
-    connect(bag->getDieThrower()->getButton(),SIGNAL(clicked()),controller,SLOT(dieThrow()));
+    connect(middleWidget->getRightHand()->getDropButton(), SIGNAL(clicked()), controller, SLOT(dropRight()));
+    connect(middleWidget->getLeftHand()->getDropButton(), SIGNAL(clicked()), controller, SLOT(dropLeft()));
+    connect(middleWidget->getRightHand()->getUseButton(), SIGNAL(clicked()), controller, SLOT(useRight()));
+    connect(middleWidget->getLeftHand()->getUseButton(), SIGNAL(clicked()), controller, SLOT(useLeft()));
+    connect(bag->getDieThrower()->getButton(), SIGNAL(clicked()), controller, SLOT(dieThrow()));
 
     //saving throws
     for (unsigned i = 0; i < enums::abilitiesNumber; ++i) {
@@ -61,7 +61,7 @@ void MainWindow::setController(Controller *c) {
     }
 
     //skills
-    for (unsigned i = 0 ; i < enums::skillsNumber; ++i) {
+    for (unsigned i = 0; i < enums::skillsNumber; ++i) {
         Skills* s = stats->getModifierLists()->getSkillsList()->getSkill(static_cast<skill>(i));
         connect(
             s->getTick(),
@@ -202,40 +202,40 @@ void MainWindow::addLabels() {
 Weapon* MainWindow::ShowAddWeaponDialog() {
     bool ok = true;
 
-    string name = QInputDialog::getText(this, "Aggiungi Arma", "Nome:",QLineEdit::Normal,QString(),&ok).toStdString();
-    if(!ok)return nullptr;
+    string name = QInputDialog::getText(this, "Aggiungi Arma", "Nome:", QLineEdit::Normal, QString(), &ok).toStdString();
+    if (!ok)return nullptr;
 
-    double weight = QInputDialog::getDouble(this, "Aggiungi Arma", "Peso:", 0, 0,2147483647,1,&ok);//maggiore di 0
-    if(!ok)return nullptr;
+    double weight = QInputDialog::getDouble(this, "Aggiungi Arma", "Peso:", 0, 0, 2147483647, 1, &ok);//maggiore di 0
+    if (!ok)return nullptr;
 
-    int nDice = QInputDialog::getInt(this, "Aggiungi Arma", "Numero di Dadi:", 0, 0,2147483647,1,&ok);
-    if(!ok)return nullptr;
+    int nDice = QInputDialog::getInt(this, "Aggiungi Arma", "Numero di Dadi:", 0, 0, 2147483647, 1, &ok);
+    if (!ok)return nullptr;
 
     vector<Die>v;
     for (int i = 0; i < nDice; i++) {
         int die = QInputDialog::getInt(this, "Aggiungi Arma",
-            QString::fromStdString("Numero di facce Dado " + std::to_string(i + 1) + ":"), 1, 1,2147483647,1,&ok);
-        if(!ok)return nullptr;
+            QString::fromStdString("Numero di facce Dado " + std::to_string(i + 1) + ":"), 1, 1, 2147483647, 1, &ok);
+        if (!ok)return nullptr;
         v.push_back(Die(die));
     }
 
     string dmgtype = QInputDialog::getText(
-                this, "Aggiungi Arma", "Tipo di Danno:",QLineEdit::Normal,QString(),&ok).toStdString();
-    if(!ok)return nullptr;
+        this, "Aggiungi Arma", "Tipo di Danno:", QLineEdit::Normal, QString(), &ok).toStdString();
+    if (!ok)return nullptr;
 
-    int nProp = QInputDialog::getInt(this, "Aggiungi Arma", "Numero di Proprietà:", 0, 0,2147483647,1,&ok);
-    if(!ok)return nullptr;
+    int nProp = QInputDialog::getInt(this, "Aggiungi Arma", "Numero di Proprietà:", 0, 0, 2147483647, 1, &ok);
+    if (!ok)return nullptr;
 
     vector<string>properties;
     for (int i = 0; i < nProp; i++) {
         QString pro = QInputDialog::getText(this, "Aggiungi Arma",
-            QString::fromStdString("Proprietà " + std::to_string(i + 1) + ":"),QLineEdit::Normal,QString(),&ok);
-        if(!ok)return nullptr;
+            QString::fromStdString("Proprietà " + std::to_string(i + 1) + ":"), QLineEdit::Normal, QString(), &ok);
+        if (!ok)return nullptr;
         properties.push_back(pro.toStdString());
     }
 
-    int bonus = QInputDialog::getInt(this, "Aggiungi Arma", "Bonus:",0,-2147483647,2147483647,1,&ok);
-    if(!ok)return nullptr;
+    int bonus = QInputDialog::getInt(this, "Aggiungi Arma", "Bonus:", 0, -2147483647, 2147483647, 1, &ok);
+    if (!ok)return nullptr;
 
     return new Weapon(name, weight, v, dmgtype, bonus, properties);
 }
@@ -246,8 +246,8 @@ Ranged *MainWindow::ShowAddRangedDialog() {
 
     bool ok = true;
 
-    unsigned range = QInputDialog::getInt(this, "Aggiungi Arma", "Range:", 0, 0,2147483647,1,&ok);
-    if(!ok) {
+    unsigned range = QInputDialog::getInt(this, "Aggiungi Arma", "Range:", 0, 0, 2147483647, 1, &ok);
+    if (!ok) {
         delete w;
         return nullptr;
     }
@@ -257,13 +257,13 @@ Ranged *MainWindow::ShowAddRangedDialog() {
 
 AmmoWeapon *MainWindow::ShowAddAmmoWeaponDialog() {
     Ranged* r = ShowAddRangedDialog();
-    if(r == nullptr)return nullptr;
+    if (r == nullptr)return nullptr;
 
     bool ok = true;
 
     string ammo = QInputDialog::getText(
-                this, "Aggiungi Arma", "Munizioni Utilizzate:",QLineEdit::Normal,QString(),&ok).toStdString();
-    if(!ok) {
+        this, "Aggiungi Arma", "Munizioni Utilizzate:", QLineEdit::Normal, QString(), &ok).toStdString();
+    if (!ok) {
         delete r;
         return nullptr;
     }
@@ -275,9 +275,9 @@ Object *MainWindow::ShowAddObjectDialog() {
     bool ok = true;
 
     string name = QInputDialog::getText(
-            this, "Aggiungi Consumabile", "Nome:",
-            QLineEdit::Normal, QString(), &ok
-        ).toStdString();
+        this, "Aggiungi Consumabile", "Nome:",
+        QLineEdit::Normal, QString(), &ok
+    ).toStdString();
     if (!ok) return nullptr;
 
     double weight = QInputDialog::getDouble(this, "Aggiungi Consumabile", "Peso:", 0, 0, 2147483647, 1, &ok);//maggiore di 0
@@ -364,12 +364,12 @@ Character::Class MainWindow::ShowAddClassDialog(bool* ok) {
 }
 
 QString MainWindow::showFileSelectDialog(const QString &title, bool* ok) {
-    QString path = QFileDialog::getOpenFileName(this, title, "./Saved Characters", "*.character");
+    QString path = QFileDialog::getOpenFileName(this, title, "../Saved Characters", "*.character");
     if (path == "" && ok != nullptr) *ok = false;
     return path;
 }
 QString MainWindow::ShowAddStringDialog(const QString & title, bool *ok) {
-    return QInputDialog::getText(this, "Inserisci", title,QLineEdit::Normal,QString(),ok);
+    return QInputDialog::getText(this, "Inserisci", title, QLineEdit::Normal, QString(), ok);
 }
 bool MainWindow::showMessageBox(const QString& title, const QString &text) {
     QMessageBox* messageBox = new QMessageBox(this);
@@ -382,7 +382,7 @@ bool MainWindow::showMessageBox(const QString& title, const QString &text) {
     return messageBox->clickedButton() == yes;
 }
 unsigned MainWindow::ShowAddIntDialog(const QString & title, unsigned min, bool *ok) {
-    return QInputDialog::getInt(this, "Inserisci", title, min, min,2147483647,1,ok);
+    return QInputDialog::getInt(this, "Inserisci", title, min, min, 2147483647, 1, ok);
 }
 
 double MainWindow::ShowAddDoubleDialog(const QString & title) {
@@ -419,15 +419,15 @@ void MainWindow::showWarning(const QString & message) {
     dialog->setLayout(new QHBoxLayout);
     dialog->layout()->addWidget(dialogLabel);
     dialog->layout()->setAlignment(Qt::AlignCenter);
-    dialog->layout()->setContentsMargins(30,30,30,30);
+    dialog->layout()->setContentsMargins(30, 30, 30, 30);
     dialogLabel->setFont(QFont("Helvetica", 9, QFont::Bold));
 
-    dialog->layout()->setSizeConstraint( QLayout::SetFixedSize );
+    dialog->layout()->setSizeConstraint(QLayout::SetFixedSize);
     dialog->setWindowTitle("Errore");
     dialog->show();
 }
 
-void MainWindow::showHealDialog(int diceSum, int modifier){
+void MainWindow::showHealDialog(int diceSum, int modifier) {
     QDialog* dialog = new QDialog(this);
     QVBoxLayout* layout = new QVBoxLayout;
     dialog->setLayout(layout);
@@ -437,9 +437,9 @@ void MainWindow::showHealDialog(int diceSum, int modifier){
             std::to_string(diceSum) + "(Somma dei dadi)" +
             (
                 modifier < 0 ?
-                 " - " + std::to_string(modifier * -1) :
-                 " + " + std::to_string(modifier)
-            ) + "(Modificatore di Costituzione)"
+                " - " + std::to_string(modifier * -1) :
+                " + " + std::to_string(modifier)
+                ) + "(Modificatore di Costituzione)"
         ),
         this
     );
@@ -459,13 +459,13 @@ void MainWindow::showDieThrowDialog(int result) {
     QDialog* dialog = new QDialog(this);
     dialog->setLayout(new QVBoxLayout);
 
-    QLabel* out = new QLabel(QString::fromStdString(std::to_string(result)),this);
+    QLabel* out = new QLabel(QString::fromStdString(std::to_string(result)), this);
     dialog->layout()->addWidget(out);
 
     out->setFont(QFont("Helvetica", 50, QFont::Bold));
 
-    dialog->layout()->setAlignment(Qt::AlignCenter);  
-    dialog->layout()->setSizeConstraint( QLayout::SetFixedSize );
+    dialog->layout()->setAlignment(Qt::AlignCenter);
+    dialog->layout()->setSizeConstraint(QLayout::SetFixedSize);
     dialog->layout()->setContentsMargins(100, 60, 100, 60);
 
     dialog->show();
@@ -482,58 +482,58 @@ void MainWindow::showDieThrowDialog(const NormalThrow& result) {
         QString hit, damage;
         int temp = attack.getAbilityModifier();
 
-        hit+="TOT tiro per colpire: ";
-        hit+=QString::fromStdString(std::to_string(attack.getThrow()));
-        QLabel* hitTitle = new QLabel(hit,this);
+        hit += "TOT tiro per colpire: ";
+        hit += QString::fromStdString(std::to_string(attack.getThrow()));
+        QLabel* hitTitle = new QLabel(hit, this);
         hitTitle->setFont(QFont("Helvetica", 10, QFont::Bold));
         layout->addWidget(hitTitle);
 
         hit.clear();
-        hit+=QString::fromStdString(std::to_string(attack.getDieScore()));
-        hit+="(d20) ";
-        if(temp < 0) hit+="- ";
-        else hit+="+ ";
-        hit+=QString::fromStdString(std::to_string(temp > 0 ? temp : -temp));
-        hit+="(Modificatore Abilità)";
+        hit += QString::fromStdString(std::to_string(attack.getDieScore()));
+        hit += "(d20) ";
+        if (temp < 0) hit += "- ";
+        else hit += "+ ";
+        hit += QString::fromStdString(std::to_string(temp > 0 ? temp : -temp));
+        hit += "(Modificatore Abilità)";
         if (attack.getWeaponBonus() != 0) {
-            hit+=" + ";
-            hit+=QString::fromStdString(std::to_string(attack.getWeaponBonus()));
-            hit+="(Bonus Arma)";
+            hit += " + ";
+            hit += QString::fromStdString(std::to_string(attack.getWeaponBonus()));
+            hit += "(Bonus Arma)";
         }
-        layout->addWidget(new QLabel(hit,this));
+        layout->addWidget(new QLabel(hit, this));
 
-        damage+="TOT Danni: ";
-        damage+=QString::fromStdString(std::to_string(attack.getTotalDamage()));
-        QLabel* damageTitle = new QLabel(damage,this);
+        damage += "TOT Danni: ";
+        damage += QString::fromStdString(std::to_string(attack.getTotalDamage()));
+        QLabel* damageTitle = new QLabel(damage, this);
         damageTitle->setFont(QFont("Helvetica", 10, QFont::Bold));
         layout->addWidget(damageTitle);
 
         damage.clear();
-        damage+=QString::fromStdString(std::to_string(attack.getDamage()));
-        damage+="(";
-        damage+=QString::fromStdString(attack.getDamageType());
-        damage+=") ";
-        if(temp < 0) damage+="- ";
-        else damage+="+ ";
-        damage+=QString::fromStdString(std::to_string(temp > 0 ? temp : -temp));
-        damage+="(Modificatore Abilità)";
+        damage += QString::fromStdString(std::to_string(attack.getDamage()));
+        damage += "(";
+        damage += QString::fromStdString(attack.getDamageType());
+        damage += ") ";
+        if (temp < 0) damage += "- ";
+        else damage += "+ ";
+        damage += QString::fromStdString(std::to_string(temp > 0 ? temp : -temp));
+        damage += "(Modificatore Abilità)";
         if (attack.getWeaponBonus() != 0) {
-            damage+=" + ";
-            damage+=QString::fromStdString(std::to_string(attack.getWeaponBonus()));
-            damage+="(Bonus Arma)";
+            damage += " + ";
+            damage += QString::fromStdString(std::to_string(attack.getWeaponBonus()));
+            damage += "(Bonus Arma)";
         }
-        if(attack.getBonusDamage() != 0){
-            damage+=" + ";
-            damage+=QString::fromStdString(std::to_string(attack.getBonusDamage()));
-            damage+="(";
-            damage+=QString::fromStdString(attack.getBonusDamageType());
-            damage+=")";
+        if (attack.getBonusDamage() != 0) {
+            damage += " + ";
+            damage += QString::fromStdString(std::to_string(attack.getBonusDamage()));
+            damage += "(";
+            damage += QString::fromStdString(attack.getBonusDamageType());
+            damage += ")";
         }
-        layout->addWidget(new QLabel(damage,this));
+        layout->addWidget(new QLabel(damage, this));
 
         layout->setAlignment(Qt::AlignCenter);
 
-        layout->setSizeConstraint( QLayout::SetFixedSize );
+        layout->setSizeConstraint(QLayout::SetFixedSize);
     }
     else {
         QLabel* results = new QLabel(
@@ -542,14 +542,14 @@ void MainWindow::showDieThrowDialog(const NormalThrow& result) {
                 "(" + "d" + std::to_string(result.getDieFaces()) + ") " +
                 (
                     result.getAbilityModifier() < 0 ?
-                     " - " + std::to_string(result.getAbilityModifier() * -1) :
-                     " + " + std::to_string(result.getAbilityModifier())
-                ) + "(Modificatore di Caratteristica)" +
+                    " - " + std::to_string(result.getAbilityModifier() * -1) :
+                    " + " + std::to_string(result.getAbilityModifier())
+                    ) + "(Modificatore di Caratteristica)" +
                 (
                     result.isProficiencyApplied() ?
                     " + " + std::to_string(result.getProficiencyBonus()) + "(Bonus di Competenza)" :
                     ""
-                )
+                    )
             ),
             this
         );
