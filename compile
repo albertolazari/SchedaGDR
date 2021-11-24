@@ -1,0 +1,6 @@
+#! /bin/bash
+mkdir build
+cd build/
+qmake "CONFIG+=build" ../SchedaGDR.pro
+make
+cd ..
