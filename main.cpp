@@ -16,7 +16,6 @@ int main(int argc, char* argv[]) {
     view.setController(&controller);
     view.show();
 
-    application.setStyle("fusion");
     application.setFont(QFont("Helvetica", 10));
 
     return QApplication::exec();
