@@ -1,0 +1,31 @@
+Feedback Progetto di Programmazione ad Oggetti
+Studente: Alberto Lazari
+
+Vincoli obbligatori
++ Soddisfatti
+
+
+Orientamento ad oggetti
++ Incapsulamento
++ Modularità (modello logico e la GUI sono separati)
++ Estensibilità ed evolvibilità, polimorfismo
++ Efficienza e robustezza
+
+
+Funzionalità
++ Gestisce un gran numero di informazioni legate alla scheda personaggio
++ Calcolo dei modificatori in base alle statistiche
+
+
+GUI
++ Visualizza i diversi tipi di dato in maniera opportuna
++ Usabile e intuitiva
+- Migliorabile attraverso l'uso di colori o immagini
+
+
+Relazione
++ Adeguata
+
+
+Suggerimenti non collegati alla valutazione
+Nessuno.
